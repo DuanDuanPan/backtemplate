@@ -10,8 +10,10 @@
 package com.orient.persistence.system.repository;
 
 import com.orient.persistence.system.po.OrientSmDeptPO;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author :  panduanduan
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Repository;
  * @Creation Date:  2018-01-23 5:17 PM
  */
 @Repository
-public interface DeptRepository extends CrudRepository<OrientSmDeptPO, Long> {
+public interface DeptRepository extends JpaRepository<OrientSmDeptPO, Long> {
 
+    List<OrientSmDeptPO> findByNameContaining(String deptName);
 }

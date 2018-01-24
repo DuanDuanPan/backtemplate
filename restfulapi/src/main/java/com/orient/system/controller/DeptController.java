@@ -18,6 +18,8 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -46,6 +48,19 @@ public class DeptController extends BaseController {
         deptRepository.save(deptPO);
         OrientRestfulResp retVal = restProcessor(() -> OrientRestfulResp.builder().
                 status(StateEnum.SUCCESS.getState()).data(String.valueOf(deptPO.getId())).build());
+        return retVal;
+    }
+
+    @ApiOperation("根据部门id获取部门详细信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "部门id", dataType = "Long", paramType = "path")
+    })
+    @GetMapping("/dept/{id}")
+    public OrientRestfulResp<OrientSmDeptPO> getDepts(@PathVariable Long id) {
+        OrientRestfulResp<OrientSmDeptPO> retVal = restProcessor(() -> {
+            OrientSmDeptPO deptPO = deptRepository.findOne(id);
+            return OrientRestfulResp.builder().status(StateEnum.SUCCESS.getState()).data(deptPO).build();
+        });
         return retVal;
     }
 }

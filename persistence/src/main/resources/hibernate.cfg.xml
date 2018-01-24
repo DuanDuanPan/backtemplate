@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.url">jdbc:oracle:thin:@localhost:49161:XE</property>
+    <property name="connection.driver_class">oracle.jdbc.OracleDriver</property>
+    <mapping class="com.orient.persistent.system.po.OrientSmDeptPO"/>
+    <mapping class="com.orient.persistent.system.po.OrientSmFilePO"/>
+    <mapping class="com.orient.persistent.system.po.OrientSmRolePO"/>
+    <mapping class="com.orient.persistent.system.po.OrientSmRoleUserPO"/>
+    <mapping class="com.orient.persistent.system.po.OrientSmUserPO"/>
+    <mapping class="com.orient.persistent.system.po.OrientSmUserDeptPO"/>
+    <!-- <property name="connection.username"/> -->
+    <!-- <property name="connection.password"/> -->
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>

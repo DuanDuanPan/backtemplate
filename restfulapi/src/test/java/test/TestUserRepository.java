@@ -10,8 +10,8 @@
 package test;
 
 import com.orient.OrientApplication;
-import com.orient.persistence.system.po.OrientSmUserPO;
-import com.orient.persistence.system.repository.UserRepository;
+import com.orient.persistent.system.po.OrientSmUserPO;
+import com.orient.persistent.system.repository.UserRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

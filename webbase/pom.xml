@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>com.orient.template</groupId>
-            <artifactId>persistence</artifactId>
+            <artifactId>config</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

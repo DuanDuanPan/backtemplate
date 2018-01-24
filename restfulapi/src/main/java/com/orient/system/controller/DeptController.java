@@ -9,8 +9,8 @@
  */
 package com.orient.system.controller;
 
-import com.orient.persistence.system.po.OrientSmDeptPO;
-import com.orient.persistence.system.repository.DeptRepository;
+import com.orient.persistent.system.po.OrientSmDeptPO;
+import com.orient.persistent.system.repository.DeptRepository;
 import com.orient.web.base.BaseController;
 import com.orient.web.enums.StateEnum;
 import com.orient.web.result.OrientRestfulResp;

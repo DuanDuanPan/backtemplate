@@ -10,11 +10,13 @@
 package com.orient.persistent.system.po;
 
 import com.orient.persistent.base.OrientBasePO;
+import com.orient.persistent.util.IsDel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -27,6 +29,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "SM_DEPT", uniqueConstraints = @UniqueConstraint(columnNames = "NAME"))
 @EntityListeners(AuditingEntityListener.class)
+@Where(clause = "IS_DEL=0")
 @Data
 @Builder
 @NoArgsConstructor
@@ -54,6 +57,7 @@ public class OrientSmDeptPO extends OrientBasePO {
 
     @Basic
     @Column(name = "IS_DEL")
-    private long isDel;
+    @Enumerated(EnumType.ORDINAL)
+    private IsDel isDel;
 
 }

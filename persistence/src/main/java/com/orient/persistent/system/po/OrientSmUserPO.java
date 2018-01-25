@@ -11,6 +11,7 @@ package com.orient.persistent.system.po;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.orient.persistent.base.OrientBasePO;
+import com.orient.persistent.util.IsDel;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
@@ -70,7 +71,8 @@ public class OrientSmUserPO extends OrientBasePO {
 
     @Basic
     @Column(name = "IS_DEL")
-    private Long isDel;
+    @Enumerated(EnumType.ORDINAL)
+    private IsDel isDel;
 
     @Basic
     @Column(name = "CREATE_USER")

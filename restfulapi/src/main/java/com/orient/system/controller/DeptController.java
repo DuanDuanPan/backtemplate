@@ -11,6 +11,7 @@ package com.orient.system.controller;
 
 import com.orient.persistent.system.po.OrientSmDeptPO;
 import com.orient.persistent.system.repository.DeptRepository;
+import com.orient.persistent.util.IsDel;
 import com.orient.web.base.BaseController;
 import com.orient.web.enums.StateEnum;
 import com.orient.web.result.OrientRestfulResp;
@@ -44,7 +45,7 @@ public class DeptController extends BaseController {
         OrientSmDeptPO deptPO = new OrientSmDeptPO();
         deptPO.setName(deptName);
         deptPO.setDescr(depDesc);
-        deptPO.setIsDel(0l);
+        deptPO.setIsDel(IsDel.VALID);
         deptRepository.save(deptPO);
         OrientRestfulResp retVal = restProcessor(() -> OrientRestfulResp.builder().
                 status(StateEnum.SUCCESS.getState()).data(String.valueOf(deptPO.getId())).build());

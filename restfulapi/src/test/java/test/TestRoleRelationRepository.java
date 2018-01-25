@@ -11,7 +11,11 @@ package test;
 
 import com.orient.OrientApplication;
 import com.orient.persistent.system.po.OrientSmRolePO;
+import com.orient.persistent.system.po.OrientSmUserPO;
 import com.orient.persistent.system.repository.RoleRepository;
+import com.orient.persistent.system.repository.UserRepository;
+import com.orient.persistent.util.IsDel;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -34,27 +38,52 @@ public class TestRoleRelationRepository {
     @Autowired
     RoleRepository roleRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
 
     @Test
     public void testAdd() {
-        OrientSmRolePO rolePO = OrientSmRolePO.builder().name("test").isDel(0l).
+        OrientSmRolePO rolePO = OrientSmRolePO.builder().name("test").isDel(IsDel.VALID).
                 build();
         roleRepository.save(rolePO);
     }
 
     @Test
     public void testModify() {
-
+        OrientSmRolePO rolePO = roleRepository.findByName("test");
+        logger.warn("query role for test:" + rolePO);
+        Assert.assertNotNull(rolePO);
+        rolePO.setIsDel(IsDel.VALID);
+        roleRepository.save(rolePO);
+        logger.warn("delete role test:" + rolePO);
+        long count = roleRepository.count();
+        Assert.assertEquals(4l, count);
     }
 
     @Test
     public void testAssignUser() {
+        OrientSmRolePO rolePO = roleRepository.findByName("test");
+        logger.warn("query role for test:" + rolePO);
+        Assert.assertNotNull(rolePO);
+        OrientSmUserPO userPO = userRepository.findByUserName("system");
+        Assert.assertNotNull(userPO);
+        rolePO.getUsers().add(userPO);
+        logger.warn("assign user system to test role");
+        roleRepository.save(rolePO);
 
     }
 
     @Test
     public void testUnAssignUser() {
-
+        OrientSmRolePO rolePO = roleRepository.findByName("test");
+        logger.warn("query role for test:" + rolePO);
+        Assert.assertNotNull(rolePO);
+        OrientSmUserPO userPO = userRepository.findByUserName("system");
+        Assert.assertNotNull(userPO);
+        rolePO.getUsers().remove(userPO);
+        logger.warn("unAssign user system to test role");
+        roleRepository.save(rolePO);
     }
 
     @Test

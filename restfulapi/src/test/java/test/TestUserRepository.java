@@ -12,6 +12,7 @@ package test;
 import com.orient.OrientApplication;
 import com.orient.persistent.system.po.OrientSmUserPO;
 import com.orient.persistent.system.repository.UserRepository;
+import com.orient.persistent.util.IsDel;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,7 +38,7 @@ public class TestUserRepository {
         userPO.setUserName("test");
         userPO.setAllName("test");
         userPO.setPassword("123456");
-        userPO.setIsDel(0l);
+        userPO.setIsDel(IsDel.VALID);
         userRepository.save(userPO);
         Assert.assertNotNull(userPO.getId());
         Assert.assertNotNull(userPO.getCreateTime());

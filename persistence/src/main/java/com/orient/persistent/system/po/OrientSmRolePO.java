@@ -11,6 +11,7 @@ package com.orient.persistent.system.po;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.orient.persistent.base.OrientBasePO;
+import com.orient.persistent.util.IsDel;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
@@ -58,7 +59,8 @@ public class OrientSmRolePO extends OrientBasePO {
 
     @Basic
     @Column(name = "IS_DEL", nullable = false)
-    private long isDel;
+    @Enumerated(EnumType.ORDINAL)
+    private IsDel isDel;
 
     @JsonIgnore
     @JoinTable(name = "SM_ROLE_USER",

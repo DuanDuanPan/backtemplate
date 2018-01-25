@@ -9,6 +9,7 @@
  */
 package com.orient.persistent.base;
 
+import javax.persistence.Transient;
 import java.io.Serializable;
 
 /**
@@ -16,8 +17,8 @@ import java.io.Serializable;
  * @Description :  base persistent object with lombok
  * @Creation Date:  2018-01-24 10:04 PM
  */
-
 public class OrientBasePO implements Serializable {
 
+    @Transient
     private String cacheKey = "orient-po";
 }

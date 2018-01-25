@@ -11,6 +11,7 @@ package com.orient.persistent.system.po;
 
 import com.orient.persistent.base.OrientBasePO;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -27,6 +28,7 @@ import javax.persistence.*;
 @Table(name = "SM_DEPT", uniqueConstraints = @UniqueConstraint(columnNames = "NAME"))
 @EntityListeners(AuditingEntityListener.class)
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrientSmDeptPO extends OrientBasePO {

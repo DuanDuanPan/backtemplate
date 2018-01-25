@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PingController extends BaseController {
 
 
-    @GetMapping("/shake")
+    @GetMapping("/")
     public Integer shake() {
         return 1;
     }

@@ -11,10 +11,13 @@ package com.orient.persistent.system.po;
 
 import com.orient.persistent.base.OrientBasePO;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -30,6 +33,7 @@ import java.util.Date;
 @Table(name = "SM_FILE")
 @EntityListeners(AuditingEntityListener.class)
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrientSmFilePO extends OrientBasePO {
@@ -67,6 +71,7 @@ public class OrientSmFilePO extends OrientBasePO {
 
     @Basic
     @Column(name = "CREATE_USER")
+    @CreatedBy
     private Long createUser;
 
     @Basic
@@ -77,7 +82,8 @@ public class OrientSmFilePO extends OrientBasePO {
 
     @Basic
     @Column(name = "UPDATAE_USER")
-    private Long updataeUser;
+    @LastModifiedBy
+    private Long updateUser;
 
     @Basic
     @Column(name = "UPDATE_TIME")

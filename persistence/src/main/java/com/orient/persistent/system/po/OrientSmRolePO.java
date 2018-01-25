@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.orient.persistent.base.OrientBasePO;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ import java.util.Set;
 @Table(name = "SM_ROLE", uniqueConstraints = @UniqueConstraint(columnNames = "NAME"))
 @EntityListeners(AuditingEntityListener.class)
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = {"users"})
@@ -46,15 +48,16 @@ public class OrientSmRolePO extends OrientBasePO {
     private long id;
 
     @Basic
-    @Column(name = "NAME")
+    @Column(name = "NAME", unique = true, nullable = false)
+    @NonNull
     private String name;
 
     @Basic
-    @Column(name = "DESCR")
+    @Column(name = "DESCR", length = 2000)
     private String descr;
 
     @Basic
-    @Column(name = "IS_DEL")
+    @Column(name = "IS_DEL", nullable = false)
     private long isDel;
 
     @JsonIgnore
@@ -62,5 +65,6 @@ public class OrientSmRolePO extends OrientBasePO {
             joinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "id")})
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Where(clause = "IS_DEL=0")
     private Set<OrientSmUserPO> users = new HashSet<>();
 }

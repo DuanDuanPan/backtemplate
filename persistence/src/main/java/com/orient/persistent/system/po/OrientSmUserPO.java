@@ -13,7 +13,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.orient.persistent.base.OrientBasePO;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -31,6 +34,7 @@ import java.util.Set;
 @Table(name = "SM_USER", uniqueConstraints = @UniqueConstraint(columnNames = "USER_NAME"))
 @EntityListeners(AuditingEntityListener.class)
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = {"roles"})
@@ -70,6 +74,7 @@ public class OrientSmUserPO extends OrientBasePO {
 
     @Basic
     @Column(name = "CREATE_USER")
+    @CreatedBy
     private Long createUser;
 
     @Basic
@@ -80,6 +85,7 @@ public class OrientSmUserPO extends OrientBasePO {
 
     @Basic
     @Column(name = "UPDATE_USER", updatable = false, nullable = false)
+    @LastModifiedBy
     private Long updateUser;
 
     @Basic
@@ -90,6 +96,7 @@ public class OrientSmUserPO extends OrientBasePO {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    @Where(clause = "IS_DEL=0")
     private Set<OrientSmRolePO> roles = new HashSet<>();
 
 }

@@ -12,26 +12,16 @@
     <artifactId>persistence</artifactId>
 
     <properties>
-        <oracle.version>11.2.0</oracle.version>
-        <druid-spring-boot-starter.version>1.1.6</druid-spring-boot-starter.version>
+
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.orient.template</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>config</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <version>${oracle.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>${druid-spring-boot-starter.version}</version>
-        </dependency>
+
     </dependencies>
 </project>

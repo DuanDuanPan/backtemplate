@@ -31,4 +31,18 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         registry.addConverter(new LocalDateTimeConverter("yyyy-MM-dd"));
         registry.addConverter(new LocalDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss.SSS"));
     }
+
+//    @Bean
+//    public ErrorPageFilter errorPageFilter() {
+//        return new ErrorPageFilter();
+//    }
+//
+//    @Bean
+//    public FilterRegistrationBean disableSpringBootErrorFilter(ErrorPageFilter filter) {
+//        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+//        filterRegistrationBean.setFilter(filter);
+//        filterRegistrationBean.setEnabled(false);
+//        return filterRegistrationBean;
+//    }
+
 }

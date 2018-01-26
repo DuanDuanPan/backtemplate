@@ -10,12 +10,7 @@
 package test;
 
 import com.orient.OrientApplication;
-import com.orient.persistent.system.po.OrientSmUserPO;
-import com.orient.persistent.system.repository.UserRepository;
-import org.junit.Assert;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -27,19 +22,5 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = OrientApplication.class)
 public class TestUserRepository {
-
-    @Autowired
-    UserRepository userRepository;
-
-    @Test
-    public void testAddUser() {
-        OrientSmUserPO userPO = new OrientSmUserPO();
-        userPO.setUserName("test");
-        userPO.setAllName("test");
-        userPO.setPassword("123456");
-        userRepository.save(userPO);
-        Assert.assertNotNull(userPO.getId());
-        Assert.assertNotNull(userPO.getCreateTime());
-    }
 
 }

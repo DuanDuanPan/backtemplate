@@ -9,20 +9,16 @@
  */
 package com.orient.persistent.system.po;
 
-import com.orient.persistent.base.OrientBasePO;
+import com.orient.common.util.domain.OrientBasePO;
+import com.orient.persistent.util.IsDel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * @author :  panduanduan
@@ -47,7 +43,7 @@ public class OrientSmFilePO extends OrientBasePO {
             }
     )
     @GeneratedValue(generator = "fileSequenceGenerator")
-    private long id;
+    private Long id;
 
     @Basic
     @Column(name = "NAME")
@@ -70,28 +66,7 @@ public class OrientSmFilePO extends OrientBasePO {
     private long filesize;
 
     @Basic
-    @Column(name = "CREATE_USER")
-    @CreatedBy
-    private Long createUser;
-
-    @Basic
-    @Column(name = "CREATE_TIME")
-    @Temporal(TemporalType.DATE)
-    @CreatedDate
-    private Date createTime;
-
-    @Basic
-    @Column(name = "UPDATAE_USER")
-    @LastModifiedBy
-    private Long updateUser;
-
-    @Basic
-    @Column(name = "UPDATE_TIME")
-    @Temporal(TemporalType.DATE)
-    @LastModifiedDate
-    private Date updateTime;
-
-    @Basic
     @Column(name = "IS_DEL")
-    private Long isDel;
+    @Enumerated(EnumType.ORDINAL)
+    private IsDel isDel = IsDel.VALID;
 }

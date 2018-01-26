@@ -22,8 +22,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 /**
  * @author :  panduanduan
  * @Description :  用户restful控制类
@@ -44,19 +42,6 @@ public class UserController extends BaseController {
         OrientRestfulResp<OrientSmUserPO> retVal = restProcessor(() -> {
             OrientSmUserPO userPO = userRepository.findOne(id);
             return OrientRestfulResp.builder().status(StateEnum.SUCCESS.getState()).data(userPO).build();
-        });
-        return retVal;
-    }
-
-    @ApiOperation("根据角色id获取部用户详细信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "roleId", value = "角色id", dataType = "Long", paramType = "path")
-    })
-    @GetMapping("/user/role/{roleId}")
-    public OrientRestfulResp<List<OrientSmUserPO>> getUsersByRoleId(@PathVariable Long roleId) {
-        OrientRestfulResp<List<OrientSmUserPO>> retVal = restProcessor(() -> {
-            List<OrientSmUserPO> queryResult = userRepository.findAll();
-            return OrientRestfulResp.builder().status(StateEnum.SUCCESS.getState()).data(queryResult).build();
         });
         return retVal;
     }

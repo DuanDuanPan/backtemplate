@@ -10,7 +10,7 @@
 package com.orient.persistent.system.po;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.orient.persistent.base.OrientBasePO;
+import com.orient.common.util.domain.OrientBasePO;
 import com.orient.persistent.util.IsDel;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -46,7 +46,7 @@ public class OrientSmRolePO extends OrientBasePO {
             }
     )
     @GeneratedValue(generator = "roleSequenceGenerator")
-    private long id;
+    private Long id;
 
     @Basic
     @Column(name = "NAME", unique = true, nullable = false)
@@ -60,7 +60,7 @@ public class OrientSmRolePO extends OrientBasePO {
     @Basic
     @Column(name = "IS_DEL", nullable = false)
     @Enumerated(EnumType.ORDINAL)
-    private IsDel isDel;
+    private IsDel isDel = IsDel.VALID;
 
     @JsonIgnore
     @JoinTable(name = "SM_ROLE_USER",

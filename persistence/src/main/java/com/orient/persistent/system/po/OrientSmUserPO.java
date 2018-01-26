@@ -10,19 +10,16 @@
 package com.orient.persistent.system.po;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.orient.persistent.base.OrientBasePO;
+import com.orient.common.util.domain.OrientBasePO;
 import com.orient.persistent.util.IsDel;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.Where;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -51,7 +48,7 @@ public class OrientSmUserPO extends OrientBasePO {
             }
     )
     @GeneratedValue(generator = "userSequenceGenerator")
-    private long id;
+    private Long id;
 
     @Basic
     @Column(name = "USER_NAME")
@@ -72,33 +69,20 @@ public class OrientSmUserPO extends OrientBasePO {
     @Basic
     @Column(name = "IS_DEL")
     @Enumerated(EnumType.ORDINAL)
-    private IsDel isDel;
-
-    @Basic
-    @Column(name = "CREATE_USER")
-    @CreatedBy
-    private Long createUser;
-
-    @Basic
-    @Column(name = "CREATE_TIME", nullable = false, updatable = false)
-    @Temporal(TemporalType.DATE)
-    @CreatedDate
-    private Date createTime;
-
-    @Basic
-    @Column(name = "UPDATE_USER", updatable = false, nullable = false)
-    @LastModifiedBy
-    private Long updateUser;
-
-    @Basic
-    @Column(name = "UPDATE_TIME")
-    @Temporal(TemporalType.DATE)
-    @LastModifiedDate
-    private Date updateTime;
+    private IsDel isDel = IsDel.VALID;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     @Where(clause = "IS_DEL=0")
+    @NotFound(action = NotFoundAction.IGNORE)
     private Set<OrientSmRolePO> roles = new HashSet<>();
+
+    @JsonIgnore
+    @JoinTable(name = "SM_USER_DEPT",
+            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "DEPT_ID", referencedColumnName = "id")})
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @NotFound(action = NotFoundAction.IGNORE)
+    private Set<OrientSmDeptPO> depts = new HashSet<>();
 
 }

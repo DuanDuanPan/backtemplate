@@ -9,17 +9,22 @@
  */
 package com.orient.persistent.system.po;
 
-import com.orient.persistent.base.OrientBasePO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.orient.common.util.domain.OrientBasePO;
 import com.orient.persistent.util.IsDel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.Where;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author :  panduanduan
@@ -45,7 +50,7 @@ public class OrientSmDeptPO extends OrientBasePO {
             }
     )
     @GeneratedValue(generator = "deptSequenceGenerator")
-    private long id;
+    private Long id;
 
     @Basic
     @Column(name = "NAME")
@@ -58,6 +63,12 @@ public class OrientSmDeptPO extends OrientBasePO {
     @Basic
     @Column(name = "IS_DEL")
     @Enumerated(EnumType.ORDINAL)
-    private IsDel isDel;
+    private IsDel isDel = IsDel.VALID;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "depts", fetch = FetchType.EAGER)
+    @Where(clause = "IS_DEL=0")
+    @NotFound(action = NotFoundAction.IGNORE)
+    private Set<OrientSmUserPO> users = new HashSet<>();
 
 }

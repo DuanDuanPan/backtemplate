@@ -7,22 +7,19 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Table(name = "sm_dept")
+@Table(name = "sm_dept_user")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SmDeptPO {
+public class SmDeptUserPO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "dept_id")
+    private Integer deptId;
 
-    @Column(name = "description")
-    private String description;
-
-    @Column(name = "pid")
-    private Integer pid;
+    @Column(name = "user_id")
+    private Integer userId;
 }

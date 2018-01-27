@@ -16,6 +16,13 @@
             <property name="caseSensitive" value="false"/>
         </plugin>
 
+        <plugin type="com.softwareloop.mybatis.generator.plugins.LombokPlugin">
+             <!-- enable annotations -->
+             <property name="builder" value="true"/>
+             <property name="allArgsConstructor" value="true"/>
+             <property name="noArgsConstructor" value="true"/>
+        </plugin>
+
         <!--不生成注释-->
         <commentGenerator>
             <property name="suppressAllComments" value="true" />
@@ -38,6 +45,18 @@
 
         <!-- table表生成对应的DoaminObject -->
         <table tableName="SM_DEPT" domainObjectName="SmDeptPO">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="SM_USER" domainObjectName="SmUserPO">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="SM_ROLE" domainObjectName="SmRolePO">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="SM_DEPT_USER" domainObjectName="SmDeptUserPO">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="SM_ROLE_USER" domainObjectName="SmRoleUserPO">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
     </context>

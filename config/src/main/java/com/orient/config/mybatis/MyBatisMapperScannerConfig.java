@@ -31,7 +31,6 @@ public class MyBatisMapperScannerConfig {
         mapperScannerConfigurer.setBasePackage("com.orient.persistent.*.mapper");
         mapperScannerConfigurer.setMarkerInterface(BaseOrientMapper.class);
         Properties properties = new Properties();
-        //for oracle sequence
         properties.setProperty("ORDER", "BEFORE");
         mapperScannerConfigurer.setProperties(properties);
         return mapperScannerConfigurer;

@@ -13,7 +13,6 @@
 
     <properties>
         <swagger2.version>2.7.0</swagger2.version>
-        <oracle.version>11.2.0</oracle.version>
         <druid-spring-boot-starter.version>1.1.6</druid-spring-boot-starter.version>
     </properties>
 
@@ -36,14 +35,15 @@
         </dependency>
 
         <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <version>${oracle.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>${druid-spring-boot-starter.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
     </dependencies>
 </project>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <!--
+        出现错误：Caused by: java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
+        解决办法：将本地的MAVEN仓库中的mysql驱动引入进来
+    -->
+    <context id="oraclegenerator" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="com.orient.common.mybatis.BaseOrientMapper"/>
+            <property name="caseSensitive" value="false"/>
+        </plugin>
+
+        <!--不生成注释-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <!-- 配置数据库连接 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/orienttdm_base"
+                        userId="root"
+                        password="123456" />
+
+
+        <javaModelGenerator targetPackage="${targetModelPackage}" targetProject="${targetJavaProject}">
+
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="${targetXMLPackage}"  targetProject="${targetResourcesProject}"/>
+
+        <javaClientGenerator targetPackage="${targetMapperPackage}" targetProject="${targetJavaProject}" type="XMLMAPPER" />
+
+
+        <!-- table表生成对应的DoaminObject -->
+        <table tableName="SM_DEPT" domainObjectName="SmDeptPO">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+    </context>
+
+</generatorConfiguration>

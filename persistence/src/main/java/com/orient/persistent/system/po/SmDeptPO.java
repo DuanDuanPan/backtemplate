@@ -1,34 +1,56 @@
-/**
- * @Project Name :  backtemplate
- * @Package Name :  com.orient.persistent.system.po
- * @Description :  TODO
- * @author :  panduanduan
- * @Creation Date:  2018-01-26 2:45 PM
- * @ModificationHistory Who    When    What
- * --------  ---------  --------------------------
- */
 package com.orient.persistent.system.po;
 
-import com.orient.persistent.base.OrientBasePO;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import javax.persistence.*;
 
-/**
- * @author :  panduanduan
- * @Description :  mybatis dept persistent object
- * @Creation Date:  2018-01-26 2:45 PM
- */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class SmDeptPO extends OrientBasePO {
+@Table(name = "sm_dept")
+public class SmDeptPO {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     private String name;
 
-    private String descr;
+    private String description;
 
-    private Long isDel;
+    /**
+     * @return id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * @param id
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     * @return name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @return description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

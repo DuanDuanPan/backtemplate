@@ -12,6 +12,16 @@
     <artifactId>persistence</artifactId>
 
     <properties>
+        <mapper.version>3.5.2</mapper.version>
+        <!--  MyBatis Generator  -->
+        <!--  Java接口和实体类  -->
+        <targetJavaProject>${basedir}/src/main/java</targetJavaProject>
+        <targetMapperPackage>com.orient.persistent.system.mapper</targetMapperPackage>
+        <targetModelPackage>com.orient.persistent.system.po</targetModelPackage>
+        <!--  XML生成路径  -->
+        <targetResourcesProject>${basedir}/src/main/resources</targetResourcesProject>
+        <targetXMLPackage>mapper</targetXMLPackage>
+        <oracle.version>11.2.0</oracle.version>
 
     </properties>
 
@@ -22,6 +32,28 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
-
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.5</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>tk.mybatis</groupId>
+                        <artifactId>mapper</artifactId>
+                        <!-- 建议使用最新版本,最新版本请从项目首页查找 -->
+                        <version>${mapper.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.44</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
 </project>

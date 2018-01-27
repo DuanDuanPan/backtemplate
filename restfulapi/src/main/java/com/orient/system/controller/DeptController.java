@@ -9,17 +9,19 @@
  */
 package com.orient.system.controller;
 
+import com.orient.persistent.system.mapper.SmDeptPOMapper;
 import com.orient.persistent.system.po.SmDeptPO;
-import com.orient.persistent.system.repository.SmDeptMapper;
 import com.orient.web.base.BaseController;
 import com.orient.web.enums.StateEnum;
 import com.orient.web.result.OrientRestfulResp;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * @author :  panduanduan
@@ -29,14 +31,19 @@ import java.util.List;
 @RestController
 public class DeptController extends BaseController {
 
-    @Autowired
-    SmDeptMapper smDeptMapper;
 
-    @ApiOperation("获取所有部门信息")
-    @GetMapping("/dept")
-    public OrientRestfulResp<List<SmDeptPO>> getDepts() {
-        OrientRestfulResp<List<SmDeptPO>> retVal = restProcessor(() -> {
-            List<SmDeptPO> deptPO = smDeptMapper.findAll();
+    @Autowired
+    SqlSession sqlSession;
+
+    @ApiOperation("根据部门id获取部门详细信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "部门id", dataType = "Integer", paramType = "path")
+    })
+    @GetMapping("/dept/{id}")
+    public OrientRestfulResp<SmDeptPO> getDepts(@PathVariable Integer id) {
+        SmDeptPOMapper mapper = sqlSession.getMapper(SmDeptPOMapper.class);
+        OrientRestfulResp<SmDeptPO> retVal = restProcessor(() -> {
+            SmDeptPO deptPO = mapper.selectByPrimaryKey(id);
             return OrientRestfulResp.builder().status(StateEnum.SUCCESS.getState()).data(deptPO).build();
         });
         return retVal;

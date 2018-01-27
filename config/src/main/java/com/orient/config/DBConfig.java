@@ -17,7 +17,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
@@ -38,13 +37,5 @@ public class DBConfig {
     @ConfigurationProperties("spring.datasource")
     public DataSource dataSource() {
         return DruidDataSourceBuilder.create().build();
-    }
-
-    //设置模版与数据源
-    @Bean
-    public JdbcTemplate jdbcTemplate() {
-        JdbcTemplate jdbcTemplate = new JdbcTemplate();
-        jdbcTemplate.setDataSource(dataSource());
-        return jdbcTemplate;
     }
 }

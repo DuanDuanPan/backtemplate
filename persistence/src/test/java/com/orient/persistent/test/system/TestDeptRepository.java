@@ -58,7 +58,7 @@ public class TestDeptRepository {
     @Test
     public void testInsert() {
         SmDeptPO smDeptPO = new SmDeptPO();
-        smDeptPO.setName("test1");
+        smDeptPO.setName("测试中文");
         smDeptPOMapper.insert(smDeptPO);
         Assert.assertNotNull(smDeptPO.getId());
     }

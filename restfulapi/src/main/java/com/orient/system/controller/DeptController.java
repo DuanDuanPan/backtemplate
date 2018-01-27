@@ -21,6 +21,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -48,4 +49,21 @@ public class DeptController extends BaseController {
         });
         return retVal;
     }
+
+    @ApiOperation("新建部门")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name", value = "部门名称", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "desc", value = "职责描述", dataType = "String", paramType = "query")
+    })
+    @PostMapping("/dept")
+    public OrientRestfulResp<Integer> saveDept(String name, String desc) {
+        SmDeptPOMapper mapper = sqlSession.getMapper(SmDeptPOMapper.class);
+        OrientRestfulResp<Integer> retVal = restProcessor(() -> {
+            SmDeptPO smDeptPO = SmDeptPO.builder().name(name).description(desc).build();
+            mapper.insert(smDeptPO);
+            return OrientRestfulResp.builder().status(StateEnum.SUCCESS.getState()).data(smDeptPO.getId()).build();
+        });
+        return retVal;
+    }
+
 }

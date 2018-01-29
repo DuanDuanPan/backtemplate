@@ -25,7 +25,7 @@ CREATE TABLE `sm_dept` (
 `id` int(11) NOT NULL,
 `name` varchar(255) NOT NULL,
 `description` varchar(2000) DEFAULT NULL,
-`pid` int(11) NOT NULL,
+`pid` int(11),
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

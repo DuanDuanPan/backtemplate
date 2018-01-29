@@ -19,7 +19,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
@@ -30,6 +32,8 @@ import java.util.List;
  * @Creation Date:  2018-01-26 2:53 PM
  */
 @RunWith(SpringRunner.class)
+@Transactional
+@Rollback
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {OrientApplication.class})
 public class TestDeptRepository {
 
@@ -46,13 +50,7 @@ public class TestDeptRepository {
     @Test
     public void testFindAll() {
         List<SmDeptPO> count = smDeptPOMapper.selectAll();
-        Assert.assertEquals(1, count.size());
-    }
-
-    @Test
-    public void testFindOne() {
-        SmDeptPO smDeptPO = smDeptPOMapper.selectByPrimaryKey(1);
-        Assert.assertNotNull(smDeptPO);
+        Assert.assertEquals(0, count.size());
     }
 
     @Test
@@ -66,10 +64,21 @@ public class TestDeptRepository {
     @Test
     public void testUpdate() {
         Example example = new Example(SmDeptPO.class);
-        example.createCriteria().andEqualTo("name", "test");
+        example.createCriteria().andEqualTo("name", "测试中文");
         SmDeptPO smDeptPO = smDeptPOMapper.selectOneByExample(example);
         Assert.assertNotNull(smDeptPO);
         smDeptPO.setDescription("desc");
         smDeptPOMapper.updateByPrimaryKey(smDeptPO);
+    }
+
+    @Test
+    public void testDelete() {
+        Example example = new Example(SmDeptPO.class);
+        example.createCriteria().andEqualTo("name", "测试中文");
+        SmDeptPO smDeptPO = smDeptPOMapper.selectOneByExample(example);
+        Assert.assertNotNull(smDeptPO);
+        smDeptPOMapper.delete(smDeptPO);
+        int count = smDeptPOMapper.selectCount(null);
+        Assert.assertEquals(0, count);
     }
 }

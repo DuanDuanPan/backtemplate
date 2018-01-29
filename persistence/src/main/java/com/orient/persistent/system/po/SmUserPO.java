@@ -27,8 +27,9 @@ public class SmUserPO {
     @Column(name = "user_password")
     private String userPassword;
 
+    @Builder.Default
     @Column(name = "is_del")
-    private Integer isDel;
+    private Integer isDel = 0;
 
     @Column(name = "create_time")
     private Date createTime;
@@ -41,4 +42,6 @@ public class SmUserPO {
 
     @Column(name = "update_user")
     private Integer updateUser;
+
+
 }

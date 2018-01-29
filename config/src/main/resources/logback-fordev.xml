@@ -48,6 +48,11 @@
         </encoder>
     </appender>
 
+    <!--log mybatis-->
+    <logger name="com.orient.persistent" level="DEBUG"/>
+    <logger name="org.apache.ibatis" level="DEBUG"/>
+    <logger name="org.mybatis.spring" level="DEBUG"/>
+
     <!-- 日志输出级别 -->
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
